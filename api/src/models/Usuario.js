@@ -29,6 +29,13 @@ class Usuario {
   static buscarTodos() {
     return usuarios;
   }
+  static buscarPeloId(id) {
+    return usuarios.find((usuario) => usuario.id === id);
+  }
+  static deletarUmUsuario(id) {
+    const index =  usuarios.findIndex((usuario) => usuario.id === id);
+    usuarios.splice(index, 1);
+  }
 
   static buscarPeloEmail(email) {
     return usuarios.find((usuario) => usuario.email === email);

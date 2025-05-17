@@ -3,11 +3,18 @@ const jwt = require("jsonwebtoken");
 const RepositorioDeUsuario = require("../repositories/repositorioDeUsuario");
 const { Usuario } = require("../models/Usuario");
 const { HttpError } = require("../errors/HttpError");
+const repositorioDeUsuario = require("../repositories/repositorioDeUsuario");
 
 class ServicoDeUsuario {
   buscarTodos() {
     return RepositorioDeUsuario.buscarTodos();
   }
+
+  pegarUmPeloId(id){
+    return repositorioDeUsuario.buscarPeloId(id)
+  }
+
+
 
   cadastrar(nome, email, cpf, senha) {
     const userSchema = z.object({

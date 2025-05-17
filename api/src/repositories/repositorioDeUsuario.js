@@ -5,6 +5,10 @@ class RepositorioDeUsuario {
     return Usuario.buscarTodos();
   }
 
+  buscarPeloId(id) {
+    return Usuario.buscarPeloId(id);
+  }
+
   criar(usuario) {
     return usuario.salvar();
   }
