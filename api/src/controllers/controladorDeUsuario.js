@@ -25,15 +25,15 @@ class ControladorDeUsuario {
       const id = req.params.id;
       const usuario = servicoDeUsuario.pegarUmPeloId(id);
 
-        if (usuario.length === 0 ){
-          return res.status(404).json("Nenhuma usuario foi encontrado");
-        }
+      if (usuario.length === 0) {
+        return res.status(404).json("Nenhuma usuario foi encontrado");
+      }
 
-        res.status(200).json(usuario);
-    }catch (error) {
+      res.status(200).json(usuario);
+    } catch (error) {
       res
-      .status(500)
-      .json({ erro: error.message || "Erro ao buscar usuários." });
+        .status(500)
+        .json({ erro: error.message || "Erro ao buscar usuários." });
     }
   }
 
@@ -70,6 +70,39 @@ class ControladorDeUsuario {
       }
 
       res.status(500).json({ erro: error.message });
+    }
+  }
+  atualizar(req, res) {
+    try {
+      const id = req.params.id;
+      const usuarioExistente = servicoDeUsuario.pegarUmPeloId(id);
+
+      if (usuarioExistente.length === 0) {
+        return res.status(404).json("Nenhum usuario foi encontrado");
+      }
+
+      const dadosNovos = req.body;
+
+      const usuarioAtualizado = servicoDeUsuario.atualizar(id, dadosNovos);
+
+      res.status(200).json(usuarioAtualizado);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ erro: error.message || "erro ao atualizar usuario" });
+    }
+  }
+
+  deletar(req, res) {
+    try {
+      const id = req.params.id;
+      servicoDeUsuario.deletar(id);
+
+      res.status(204).json({ message: "deletado com sucesso!" });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ erro: error.message || "erro ao buscar usuarios" });
     }
   }
 }

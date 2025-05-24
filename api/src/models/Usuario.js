@@ -46,6 +46,12 @@ class Usuario {
     return this;
   }
 
+  static atualizar(id, dadosNovos) {
+    const index =  usuarios.findIndex((usuario) => usuario.id === id);
+    usuarios[index] = { ...usuarios[index], ...dadosNovos};
+    return usuarios[index];
+  }
+
   static async criptografar(senha) {
     return await bcrypt.hash(senha, 10);
   }

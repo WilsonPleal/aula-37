@@ -68,6 +68,24 @@ class ServicoDeUsuario {
 
     return token;
   }
+
+  atualizar(id, dados) {
+    const {nome, email, cpf, senha} = dados;
+    const dadosExistentes = this.pegarUmPeloId(id);
+
+    const dadosAtualizados = {
+      nome: nome ?? dadosExistentes.nome,
+      email: email ?? dadosExistentes.email,
+      cpf: cpf ?? dadosExistentes.cpf,
+      senha: senha ?? dadosExistentes.senha
+    };
+
+    return repositorioDeUsuario.atualizar(id, dadosAtualizados);
+  }
+
+  deletar(id) {
+    return repositorioDeUsuario.deletar(id)
+  }
 }
 
 module.exports = new ServicoDeUsuario();
